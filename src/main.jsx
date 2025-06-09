@@ -12,11 +12,13 @@ import Fridge from './Pages/Fridge.jsx';
 import Login from './Components/auth/Login.jsx';
 import Register from './Components/auth/Register.jsx';
 import AuthProvider from './Providers/AuthProvider.jsx';
+import ErrorPage from './Pages/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
    Component: Root,
+   errorElement: <ErrorPage/>,
    children: [
     {
       index: true,
