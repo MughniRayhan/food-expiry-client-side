@@ -15,6 +15,7 @@ import AuthProvider from './Providers/AuthProvider.jsx';
 import ErrorPage from './Pages/ErrorPage.jsx';
 import AddFood from './Pages/AddFood.jsx';
 import MyItems from './Pages/MyItems.jsx';
+import PrivateRoute from './Providers/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,11 +33,11 @@ const router = createBrowserRouter([
     },
     {
        path: '/addfood',
-       Component: AddFood
+       element: <PrivateRoute><AddFood/></PrivateRoute>
     },
     {
       path: '/myitems',
-      Component: MyItems
+      element: <PrivateRoute><MyItems/></PrivateRoute> 
     },
     {
       path: '/login',

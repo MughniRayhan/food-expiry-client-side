@@ -1,10 +1,11 @@
 import React from 'react'
-import { Outlet } from 'react-router'
+import { Outlet, useNavigation } from 'react-router'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import { ToastContainer} from 'react-toastify';
-
+import Loader from '../Components/Loader'
 function Root() {
+  const state = useNavigation();
   return (
     <div className='poppins'>
       <ToastContainer/>
@@ -12,7 +13,7 @@ function Root() {
       <Navbar/>
      </header>
       <main>
-          <Outlet/>
+           {state=="loading" ? <Loader/> : <Outlet/>}
       </main>
       <footer>
         <Footer/>
