@@ -53,7 +53,7 @@ function AuthProvider({children}) {
         signIn,
         logOut,
         updateUser,
-       
+        
         loading,
         setLoading
     }

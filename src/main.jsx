@@ -13,6 +13,8 @@ import Login from './Components/auth/Login.jsx';
 import Register from './Components/auth/Register.jsx';
 import AuthProvider from './Providers/AuthProvider.jsx';
 import ErrorPage from './Pages/ErrorPage.jsx';
+import AddFood from './Pages/AddFood.jsx';
+import MyItems from './Pages/MyItems.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
     {
       path: '/fridge',
       Component: Fridge
+    },
+    {
+       path: '/addfood',
+       Component: AddFood
+    },
+    {
+      path: '/myitems',
+      Component: MyItems
     },
     {
       path: '/login',
