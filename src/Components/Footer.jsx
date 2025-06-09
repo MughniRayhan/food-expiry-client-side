@@ -54,7 +54,7 @@ update, and manage food with expiry dates. </p>
          </div>
         
             </div>
-            <div className='bg-secondary    p-4'>
+            <div className='bg-primary    p-4'>
              <p className='text-center text-white text-base'> Copyright © 2025 -  <span className='text-xl  rancho'> All right reserved by FoodGuard</span></p>
             </div>
         </div>
