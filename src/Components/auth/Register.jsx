@@ -3,7 +3,7 @@ import { use } from 'react';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../Providers/AuthProvider';
- import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 function Register() {
