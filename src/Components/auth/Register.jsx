@@ -84,7 +84,7 @@ function Register() {
   return (
     <div  className=' flex justify-center items-center min-h-screen p-8  bg-base-300'>
 
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-6">
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-6 mt-8">
     <h1 className="sm:text-3xl text-2xl font-bold text-center">Register now</h1> 
         <form onSubmit={handleRegister} className="card-body">
         <fieldset className="fieldset">
