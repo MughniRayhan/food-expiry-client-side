@@ -1,13 +1,12 @@
 import React from 'react'
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 function Fridge() {
   const foods = useLoaderData();
-  console.log("foods",foods)
   const today = new Date();
 
   return (
-     <div className="p-10 sm:px-20  mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-white">
+     <div className="p-10 sm:px-20  mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-base-300">
       
       {foods.map((food, index) => {
         const isExpired = new Date(food.expirydate) < today;
@@ -30,7 +29,7 @@ function Fridge() {
     </div>
     }
     <div className="card-actions sm:justify-end mt-5 sm:mt-0 ">
-      <button className="btn btn-primary w-full sm:w-30 hover:bg-white hover:text-primary hover:border hover:border-primary">See Details</button>
+      <Link to={`/fridge/${food._id}`}><button className="btn btn-primary w-full sm:w-30 hover:bg-white hover:text-primary hover:border hover:border-primary">See Details</button></Link>
     </div>
   </div>
 </div>

@@ -17,6 +17,7 @@ import AddFood from './Pages/AddFood.jsx';
 import MyItems from './Pages/MyItems.jsx';
 import PrivateRoute from './Providers/PrivateRoute.jsx';
 import Loader from './Components/Loader.jsx';
+import FoodDetails from './Components/FoodDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,12 @@ const router = createBrowserRouter([
     {
       path: '/myitems',
       element: <PrivateRoute><MyItems/></PrivateRoute> 
+    },
+     {
+       path: '/fridge/:id',
+       loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+       hydrateFallbackElement: <Loader/>,
+       element: <PrivateRoute><FoodDetails/></PrivateRoute>
     },
     {
       path: '/login',

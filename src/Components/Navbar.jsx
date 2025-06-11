@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 function Navbar() {
 const {user,setUser,logOut} = use(AuthContext)
 const [name,setName] = useState("")
-console.log(user)
 
 useEffect(()=>{
  if (user?.displayName) {
