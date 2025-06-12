@@ -18,6 +18,7 @@ import MyItems from './Pages/MyItems.jsx';
 import PrivateRoute from './Providers/PrivateRoute.jsx';
 import Loader from './Components/Loader.jsx';
 import FoodDetails from './Components/FoodDetails.jsx';
+import UpdateFood from './Components/UpdateFood.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,8 @@ const router = createBrowserRouter([
     },
     {
       path: '/myitems',
+      loader: () => fetch('http://localhost:3000/foods'),
+      hydrateFallbackElement: <Loader/>,
       element: <PrivateRoute><MyItems/></PrivateRoute> 
     },
      {
@@ -48,6 +51,12 @@ const router = createBrowserRouter([
        loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
        hydrateFallbackElement: <Loader/>,
        element: <PrivateRoute><FoodDetails/></PrivateRoute>
+    },
+     {
+       path: '/update/:id',
+       loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+       hydrateFallbackElement: <Loader/>,
+       element: <PrivateRoute><UpdateFood/></PrivateRoute>
     },
     {
       path: '/login',
