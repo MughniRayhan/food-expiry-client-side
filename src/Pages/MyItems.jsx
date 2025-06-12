@@ -4,17 +4,58 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import UpdateFood from '../Components/UpdateFood';
+import Swal from 'sweetalert2';
 
 function MyItems() {
   const allFoods = useLoaderData();
   const {user} = use(AuthContext);
-  // const [selectedFood, setSelectedFood] = useState(null);
   
   const myFoods = allFoods.filter((food)=>food.email === user.email);
+  const [foods,setFoods] = useState(myFoods)
+
+  const handleDelete = (id) =>{
+    Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:3000/foods/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.deletedCount) {
+         Swal.fire({
+        title: "Deleted!",
+        text: "Your food has been deleted.",
+        icon: "success"
+      });
+  
+      const remainingFoods = foods.filter(food => food._id !== id);
+      setFoods(remainingFoods);
+        }
+      })
+     
+    }
+  });
+  
+  }
+
   return (
     <div className="overflow-x-auto bg-accent p-20 pt-30">
+      {
+        foods.length<=0 && <h3 className='text-xl text-center text-white mb-3'>No Items added</h3>
+      }
   <table className="table bg-white">
-    {/* head */}
+    
     <thead>
       <tr>
         <th></th>
@@ -27,7 +68,7 @@ function MyItems() {
     </thead>
     <tbody>
       {
-        myFoods.map((data,i)=>(
+        foods.map((data,i)=>(
           <tr key={i}>
         <th>{i}</th>
         <td> 
@@ -47,7 +88,7 @@ function MyItems() {
         <td>{data.expirydate}</td>
         <td>
           <div className='flex  items-center gap-4'>
-            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            
 <button className="bg-secondary text-white p-2 rounded-md cursor-pointer hover:bg-primary"
   onClick={() => {
     document.getElementById(`modal-${data._id}`).showModal();
@@ -64,7 +105,11 @@ function MyItems() {
     <UpdateFood key={data._id} food={data} />
   </div>
 </dialog>
-            <button className='bg-secondary text-white p-2 rounded-md cursor-pointer hover:bg-primary'><MdDelete /></button>
+            <button className='bg-secondary text-white p-2 rounded-md cursor-pointer hover:bg-primary'
+            onClick={()=>handleDelete(data._id)}
+            >
+              <MdDelete />
+            </button>
           </div>
         </td>
       </tr>
