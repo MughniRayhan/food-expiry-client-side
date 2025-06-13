@@ -12,7 +12,7 @@ function ExpiredFood() {
 
      const expiredFood = foods.filter((food)=>new Date(food.expirydate) < today); 
   return (
-    <section className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
+    <section className='py-20 md:px-30 px-4  bg-base-300 text-base w-full '>
         <h2 className='text-center text-3xl text-accent font-semibold'>Expired <span className='text-secondary'>Food</span></h2>
         <div className="p-2 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {

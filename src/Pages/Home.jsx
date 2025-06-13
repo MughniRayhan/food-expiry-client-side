@@ -2,6 +2,7 @@ import React from 'react'
 import Banner from '../Components/Banner'
 import NearlyExpiryItems from '../Components/NearlyExpiryItems'
 import ExpiredFood from '../Components/ExpiredFood'
+import FoodUsageSuggestions from '../Components/FoodUsageSuggestions'
 
 function Home() {
   
@@ -10,6 +11,7 @@ function Home() {
       <Banner/>
       <NearlyExpiryItems/>
       <ExpiredFood/>
+      <FoodUsageSuggestions/>
     </div>
   )
 }
