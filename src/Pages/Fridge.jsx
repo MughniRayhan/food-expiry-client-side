@@ -6,7 +6,7 @@ function Fridge() {
   const today = new Date();
 
   return (
-     <div className="p-10 sm:px-20  mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-base-300">
+     <div className="p-10 md:px-20 px-4 mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-base-300">
       
       {foods.map((food, index) => {
         const isExpired = new Date(food.expirydate) < today;

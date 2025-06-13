@@ -16,7 +16,7 @@ function NearlyExpiryItems() {
   }, []);
 
   return (
-    <div className='py-20 sm:px-30 px-4  bg-base-200 text-base w-full '>
+    <section className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
         <h2 className='text-center text-3xl text-accent font-semibold'>Nearly <span className='text-secondary'>Expiry</span> Items</h2>
         {
             nearlyExpiry.length<=0 && 
@@ -24,7 +24,7 @@ function NearlyExpiryItems() {
                 <p className='text-2xl font-medium text-center text-primary'>NO Nearly Expiry Food Yet</p>
             </div>
         }
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
                 {
                 nearlyExpiry.map((food)=>(
                     <div key={food._id} className="card bg-white shadow-xl transition-transform hover:scale-105 p-4 rounded-xl">
@@ -48,7 +48,7 @@ function NearlyExpiryItems() {
                 ))
               }
               </div>
-    </div>
+    </section>
   )
 }
 

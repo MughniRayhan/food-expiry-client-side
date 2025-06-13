@@ -1,0 +1,47 @@
+import React, { useEffect, useState } from 'react'
+
+function ExpiredFood() {
+    const [foods, setFoods] = useState([]);
+     const today = new Date();
+
+     useEffect(() => {
+    fetch("http://localhost:3000/foods")
+      .then(res => res.json())
+      .then(data => setFoods(data));
+  }, []);
+
+     const expiredFood = foods.filter((food)=>new Date(food.expirydate) < today); 
+  return (
+    <section className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
+        <h2 className='text-center text-3xl text-accent font-semibold'>Expired <span className='text-secondary'>Food</span></h2>
+        <div className="p-2 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
+            {
+                expiredFood.map((food)=>
+                 <div key={food._id} className="card  shadow-2xl bg-accent mx-auto sm:mt-4  border border-gray-100 pb-4">
+  <figure className='h-40'>
+    <img
+      src={food.photo}
+      alt={food.title} />
+  </figure>
+  <div className=" p-4">
+    <h2 className="card-title  sm:text-xl text-base text-white  mb-2">{food.title}</h2>
+    <p className="text-sm text-white duration-200">Category: <span className="font-medium">{food.category}</span></p>
+    <p className="text-sm text-white duration-200 my-1">Quantity: <span className="font-medium">{food.quantity}</span></p>
+    
+    <div className="badge bg-primary text-white p-3">
+      <div className="inline-grid *:[grid-area:1/1]">
+  <div className="status status-error animate-ping"></div>
+  <div className="status status-error"></div>
+</div>Expired
+    </div>
+   
+  </div>
+</div>
+                )
+            }
+        </div>
+    </section>
+  )
+}
+
+export default ExpiredFood
