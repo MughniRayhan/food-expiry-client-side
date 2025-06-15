@@ -9,8 +9,9 @@ function Fridge() {
   const [foods,setFoods] = useState(initialFoods)
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
-
- 
+   const [selectedCategory, setSelectedCategory] = useState('All');
+ const categories = ["All", ...new Set(initialFoods.map(f => f.category))]
+  //  searching
       const handleSearch = async (e) => {
     e.preventDefault();
     const query = search.trim();
@@ -24,7 +25,7 @@ function Fridge() {
       const res = await fetch(`http://localhost:3000/foods/search?q=${query}`);
       const data = await res.json();
       setFoods(data);
-    
+      setSelectedCategory('All');
     } catch (err) {
       
     } finally {
@@ -32,10 +33,20 @@ function Fridge() {
     }
   };
 
+  // filter
+   const filteredFoods =
+    selectedCategory === 'All'
+      ? 
+      foods
+      : 
+      foods.filter(food => food.category === selectedCategory);
+
+
   return (
     <div className='p-10 md:px-20 px-4 mt-20 bg-base-300'>
       
-            <form onSubmit={handleSearch} className="flex justify-center">
+<div className='flex justify-center '>
+            <form onSubmit={handleSearch} className='w-[50%]'>
         <label className="input w-full max-w-xl flex items-center gap-2">
           <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
@@ -53,17 +64,30 @@ function Fridge() {
         </label>
       </form>
 
+           <div className="mb-4 text-center w-[20%]">
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="select select-bordered w-full max-w-xs"
+        >
+          {categories.map((cat,i) => (
+            <option key={i}>{cat}</option>
+          ))}
+        </select>
+      </div>
+</div>
+
        {
         loading ? <Loader/>
         :
         <div >
            {
-            foods.length===0 ? 
+            filteredFoods.length===0 ? 
             <p className='font-medium text-secondary text-center mt-10'>No Foods Found</p>
             :
             <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
       {
-      foods.map((food, index) => {
+      filteredFoods.map((food, index) => {
         const isExpired = new Date(food.expirydate) < today;
 
         return (
