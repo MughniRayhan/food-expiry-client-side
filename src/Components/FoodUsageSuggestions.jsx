@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from "framer-motion"
 
 function FoodUsageSuggestions() {
   const [foods, setFoods] = useState([]);
@@ -33,7 +34,10 @@ function FoodUsageSuggestions() {
   }, []);
 
   return (
-    <section className='py-20 md:px-30 px-4  bg-base-200 text-base w-full'>
+    <motion.section 
+               initial={{opacity:0, y:50}}
+                whileInView={{opacity:1, y:0}}
+                transition={{delay:0.2, duration:1}}  className='py-20 md:px-30 px-4  bg-base-200 text-base w-full'>
       <h2 className='text-center text-3xl text-accent font-semibold mb-2'>Food Usage <span className='text-secondary'>Suggestions</span></h2>
       <p className=' text-center text-primary/80  font-semibold'>These foods will expire soon. Use them quickly</p>
       <p className="text-center text-gray-500 mb-6">Get ideas to use foods before they expire</p>
@@ -50,7 +54,7 @@ function FoodUsageSuggestions() {
         ))
         }
       </div>
-    </section>
+    </motion.section>
   );
 }
 

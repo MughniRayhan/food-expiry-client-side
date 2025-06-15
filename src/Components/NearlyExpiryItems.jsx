@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router';
+import { motion } from "framer-motion"
 
 function NearlyExpiryItems() {
     const [nearlyExpiry,setnearlyExpiry] = useState([])
@@ -16,7 +17,11 @@ function NearlyExpiryItems() {
   }, []);
 
   return (
-    <section className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
+    <motion.section 
+           initial={{opacity:0, y:50}}
+            whileInView={{opacity:1, y:0}}
+            transition={{delay:0.2, duration:1}} 
+            className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
         <h2 className='text-center text-3xl text-accent font-semibold'>Nearly <span className='text-secondary'>Expiry</span> Items</h2>
         {
             nearlyExpiry.length<=0 && 
@@ -48,7 +53,7 @@ function NearlyExpiryItems() {
                 ))
               }
               </div>
-    </section>
+    </motion.section>
   )
 }
 

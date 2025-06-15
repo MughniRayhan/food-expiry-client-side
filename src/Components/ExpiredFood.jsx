@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from "framer-motion"
 
 function ExpiredFood() {
     const [foods, setFoods] = useState([]);
@@ -12,7 +13,10 @@ function ExpiredFood() {
 
      const expiredFood = foods.filter((food)=>new Date(food.expirydate) < today); 
   return (
-    <section className='py-20 md:px-30 px-4  bg-base-300 text-base w-full '>
+    <motion.section 
+               initial={{opacity:0, y:50}}
+                whileInView={{opacity:1, y:0}}
+                transition={{delay:0.2, duration:1}}  className='py-20 md:px-30 px-4  bg-base-300 text-base w-full '>
         <h2 className='text-center text-3xl text-accent font-semibold'>Expired <span className='text-secondary'>Food</span></h2>
         <div className="p-2 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {
@@ -40,7 +44,7 @@ function ExpiredFood() {
                 )
             }
         </div>
-    </section>
+    </motion.section>
   )
 }
 

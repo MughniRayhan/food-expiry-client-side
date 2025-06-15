@@ -1,5 +1,5 @@
 import React from 'react';
-//import { AuthContext } from '../Providers/AuthProvider';
+import { motion } from "framer-motion"
 
 function StorageTips() {
   const tips = [
@@ -12,7 +12,10 @@ function StorageTips() {
   ];
 
   return (
-   <section className='py-20   bg-base-200 text-base w-full'>
+   <motion.section 
+              initial={{opacity:0, y:50}}
+               whileInView={{opacity:1, y:0}}
+               transition={{delay:0.2, duration:1}}  className='py-20   bg-base-200 text-base w-full'>
      <h2 className='text-center text-3xl text-accent font-semibold mb-2'>Storage Tips & <span className='text-secondary'>Best Practices</span></h2>
      <div className=" py-16 px-6 mt-8" style={{
             backgroundImage: `linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(17, 17, 17, 0.6)),url("https://i.ibb.co/21q7q76S/2149565225.jpg")`,
@@ -26,11 +29,14 @@ function StorageTips() {
           <li key={index} className='text-white bg-accent/50 rounded-2xl p-4'>{tip}</li>
         ))}
       </ul>
-      <img src="https://i.ibb.co/21q7q76S/2149565225.jpg" alt="" className='md:w-[40%] w-full rounded-md order-1 md:order-2'/>
+      <motion.img 
+        animate={{y:[0,20,0]}}
+        transition={{duration:4, repeat:Infinity}} 
+        src="https://i.ibb.co/21q7q76S/2149565225.jpg" alt="" className='md:w-[40%] w-full rounded-md order-1 md:order-2'/>
       
       </div>
     </div>
-   </section>
+   </motion.section>
   );
 }
 
