@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLoaderData } from 'react-router';
 import Loader from '../Components/Loader';
+import CountUp from 'react-countup';
 
 
 function Fridge() {
@@ -34,18 +35,27 @@ function Fridge() {
   };
 
   // filter
-   const filteredFoods =
-    selectedCategory === 'All'
+const filteredFoods =
+  selectedCategory === 'All'
       ? 
-      foods
+    foods
       : 
-      foods.filter(food => food.category === selectedCategory);
+    foods.filter(food => food.category === selectedCategory);
 
+
+// countup
+  const expiredFood = filteredFoods.filter((food)=> new Date(food.expirydate) < today).length;
+  const nearlyExpired = filteredFoods.filter((food)=>{
+  const expiryDate = new Date(food.expirydate);
+  const fiveDaysLater = new Date(today);
+  fiveDaysLater.setDate(today.getDate()+5);
+  return expiryDate >= today && expiryDate <=fiveDaysLater
+}).length;
 
   return (
     <div className='p-10 md:px-20 px-4 mt-20 bg-base-300'>
       
-<div className='flex justify-center '>
+<div className='flex justify-center gap-3'>
             <form onSubmit={handleSearch} className='w-[50%]'>
         <label className="input w-full max-w-xl flex items-center gap-2">
           <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -76,6 +86,8 @@ function Fridge() {
         </select>
       </div>
 </div>
+{/* countup */}
+
 
        {
         loading ? <Loader/>
@@ -85,6 +97,30 @@ function Fridge() {
             filteredFoods.length===0 ? 
             <p className='font-medium text-secondary text-center mt-10'>No Foods Found</p>
             :
+<>
+<div className='flex sm:flex-row flex-col flex-wrap justify-center items-center gap-5 mt-4'>
+          <div className='bg-white rounded-2xl p-5 w-50 text-center'>
+           <h2 className=' text-3xl font-extrabold '>
+          <CountUp
+           start={0}
+           end={expiredFood}
+           duration={2.75}/>+
+           </h2>
+          <p className='text-[#0F0F0F]/[60%]  font-semibold mt-2'> Expired Food </p>
+            </div>
+
+           <div className='bg-white rounded-2xl p-5  w-50 text-center'>
+           <h2 className=' text-3xl font-extrabold '>
+          <CountUp
+           start={0}
+           end={nearlyExpired}
+           duration={2.75}/>+
+           </h2>
+          <p className='text-[#0F0F0F]/[60%]  font-semibold mt-2'>Nearly Expiry Food </p>
+            </div>
+
+            
+        </div>
             <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
       {
       filteredFoods.map((food, index) => {
@@ -115,6 +151,8 @@ function Fridge() {
         );
       })}
       </div>
+    </>
+      
            }
     </div>
        }
