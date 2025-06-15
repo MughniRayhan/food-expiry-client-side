@@ -1,14 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLoaderData } from 'react-router';
+import Loader from '../Components/Loader';
+
 
 function Fridge() {
-  const foods = useLoaderData();
+  const initialFoods = useLoaderData();
   const today = new Date();
+  const [foods,setFoods] = useState(initialFoods)
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false);
+
+ 
+      const handleSearch = async (e) => {
+    e.preventDefault();
+    const query = search.trim();
+    if (!query){
+      setFoods(initialFoods)
+      return 
+    };
+
+    setLoading(true);
+    try {
+      const res = await fetch(`http://localhost:3000/foods/search?q=${query}`);
+      const data = await res.json();
+      setFoods(data);
+    
+    } catch (err) {
+      
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-     <div className="p-10 md:px-20 px-4 mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-base-300">
+    <div className='p-10 md:px-20 px-4 mt-20 bg-base-300'>
       
-      {foods.map((food, index) => {
+            <form onSubmit={handleSearch} className="flex justify-center">
+        <label className="input w-full max-w-xl flex items-center gap-2">
+          <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input
+            type="search"
+            className="grow"
+            placeholder="Search by category or title"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </label>
+      </form>
+
+       {
+        loading ? <Loader/>
+        :
+        <div >
+           {
+            foods.length===0 ? 
+            <p className='font-medium text-secondary text-center mt-10'>No Foods Found</p>
+            :
+            <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      {
+      foods.map((food, index) => {
         const isExpired = new Date(food.expirydate) < today;
 
         return (
@@ -35,6 +90,10 @@ function Fridge() {
 </div>
         );
       })}
+      </div>
+           }
+    </div>
+       }
     </div>
   )
 }
