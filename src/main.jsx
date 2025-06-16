@@ -42,8 +42,6 @@ const router = createBrowserRouter([
     },
     {
       path: '/myitems',
-      loader: () => fetch('http://localhost:3000/foods'),
-      hydrateFallbackElement: <Loader/>,
       element: <PrivateRoute><MyItems/></PrivateRoute> 
     },
      {
