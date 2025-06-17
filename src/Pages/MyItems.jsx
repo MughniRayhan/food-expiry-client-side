@@ -25,7 +25,7 @@ function MyItems() {
     confirmButtonText: "Yes, delete it!"
   }).then((result) => {
     if (result.isConfirmed) {
-      fetch(`http://localhost:3000/foods/${id}`, {
+      fetch(`https://food-expiry-server-side.vercel.app/foods/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

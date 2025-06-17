@@ -28,7 +28,7 @@ function FoodDetails() {
       date: new Date().toISOString(),
     };
 
-    fetch(`http://localhost:3000/foods/${food._id}/notes`, {
+    fetch(`https://food-expiry-server-side.vercel.app/foods/${food._id}/notes`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json' 

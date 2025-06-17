@@ -23,7 +23,7 @@ function AddFood() {
       const formData = new FormData(form);
       const newFood = Object.fromEntries(formData.entries());
      
-             fetch('http://localhost:3000/foods', {
+             fetch('https://food-expiry-server-side.vercel.app/foods', {
                  method: 'POST',
                  headers: {
                      'Content-Type': 'application/json'

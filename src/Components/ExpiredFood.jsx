@@ -6,7 +6,7 @@ function ExpiredFood() {
      const today = new Date();
 
      useEffect(() => {
-    fetch("http://localhost:3000/foods")
+    fetch("https://food-expiry-server-side.vercel.app/foods")
       .then(res => res.json())
       .then(data => {setFoods(data)});
   }, [])

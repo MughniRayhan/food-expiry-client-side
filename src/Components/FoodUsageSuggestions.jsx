@@ -6,7 +6,7 @@ function FoodUsageSuggestions() {
   const [nearlyExpiring,setNearlyExpiring] = useState([])
 
   useEffect(() => {
-      fetch("http://localhost:3000/nearly-expiry") 
+      fetch("https://food-expiry-server-side.vercel.app/nearly-expiry") 
         .then(res => res.json())
         .then(data => {
           

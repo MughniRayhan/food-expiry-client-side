@@ -18,7 +18,7 @@ function UpdateFood({food,onUpdate}) {
       const formData = new FormData(form);
       const updatedFood = Object.fromEntries(formData.entries());
 
-      fetch(`http://localhost:3000/foods/${foodData._id}`, {
+      fetch(`https://food-expiry-server-side.vercel.app/foods/${foodData._id}`, {
                        method: 'PUT',
                        headers: {
                            'Content-Type': 'application/json'

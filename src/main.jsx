@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     },
     {
       path: '/fridge',
-      loader: () => fetch('http://localhost:3000/foods'),
+      loader: () => fetch('https://food-expiry-server-side.vercel.app/foods'),
       hydrateFallbackElement: <Loader/>,
       Component: Fridge
     },
@@ -42,19 +42,19 @@ const router = createBrowserRouter([
     },
     {
       path: '/myitems',
-      loader: () => fetch('http://localhost:3000/foods'),
+      loader: () => fetch('https://food-expiry-server-side.vercel.app/foods'),
       hydrateFallbackElement: <Loader/>,
       element: <PrivateRoute><MyItems/></PrivateRoute>  
     },
      {
        path: '/fridge/:id',
-       loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+       loader: ({params}) => fetch(`https://food-expiry-server-side.vercel.app/foods/${params.id}`),
        hydrateFallbackElement: <Loader/>,
        element: <PrivateRoute><FoodDetails/></PrivateRoute>
     },
      {
        path: '/update/:id',
-       loader: ({params}) => fetch(`http://localhost:3000/foods/${params.id}`),
+       loader: ({params}) => fetch(`https://food-expiry-server-side.vercel.app/foods/${params.id}`),
        hydrateFallbackElement: <Loader/>,
        element: <PrivateRoute><UpdateFood/></PrivateRoute>
     },

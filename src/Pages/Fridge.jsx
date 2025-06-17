@@ -23,7 +23,7 @@ function Fridge() {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3000/foods/search?q=${query}`);
+      const res = await fetch(`https://food-expiry-server-side.vercel.app/foods/search?q=${query}`);
       const data = await res.json();
       setFoods(data);
       setSelectedCategory('All');
