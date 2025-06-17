@@ -2,24 +2,30 @@
 
 ## 🎯 Purpose
 
-The **Food Expiry Tracker System** is a full-stack web application designed to help users manage food items and receive alerts before they expire. This helps reduce food waste and encourages smarter consumption habits.
+This app allows users to:
+
+- Add food items with names, categories, quantities, and expiry dates
+- View, update, or delete food items
+- Get notified before items are about to expire
+- Track wasted food and receive reminders
+- Register and log in securely using email/password or Google Sign-In
 
 ---
 
 ## 🌐 Live URL
 
-🔗 [Visit the App]()
+🔗 [Visit the App](https://lighthearted-pony-e9a162.netlify.app/)
 
 ---
 
-## ✨ Key Features
+## ⚙️ Features
 
-- 🔐 **User Authentication** with Email/Password & Google (Firebase)
-- 📋 **CRUD Operations** to manage food items
-- ⏰ **Smart Expiry Alerts** before items go bad
-- 🗑️ **Wasted Food Tracker** to log discarded items
-- 🔔 **Reminder System** for timely consumption
-- 📱 **Responsive Design** for all device sizes
+- 🔐 **Authentication:** Email/password and Google Sign-In using Firebase
+- 📋 **CRUD Operations:** Create, read, update, and delete food entries
+- ⏰ **Expiry Alerts:** Notifies users before food goes bad
+- 🗑️ **Wasted Food Tracker:** Track what items go unused
+- 🔔 **Smart Reminder System:** Helps reduce forgetfulness
+- 📈 **Responsive Design:** Works smoothly on desktop and mobile
 
 ---
 
