@@ -1,14 +1,13 @@
 import React, { use, useState } from 'react'
-//import { useLoaderData } from 'react-router'
 import { AuthContext } from '../Providers/AuthProvider';
 import { toast } from 'react-toastify';
 import Loader from './Loader';
 
-function UpdateFood({food}) {
-    // const food = useLoaderData();
+function UpdateFood({food,onUpdate}) {
     const {user} = use(AuthContext);
+    const [foodData, setFoodData] = useState(food);
      
-    if (!food) {
+    if (!foodData) {
     return <Loader/>;
   }
       
@@ -19,7 +18,7 @@ function UpdateFood({food}) {
       const formData = new FormData(form);
       const updatedFood = Object.fromEntries(formData.entries());
 
-      fetch(`http://localhost:3000/foods/${food._id}`, {
+      fetch(`http://localhost:3000/foods/${foodData._id}`, {
                        method: 'PUT',
                        headers: {
                            'Content-Type': 'application/json'
@@ -30,7 +29,10 @@ function UpdateFood({food}) {
                    .then(data => {
                        if(data.modifiedCount) {
                           toast.success("Updated food successfully!");
-                          
+                          setFoodData(data);
+                          if (onUpdate) {
+            onUpdate({ ...food, ...updatedFood });
+          }
                        }
                       
                    })
@@ -47,20 +49,20 @@ function UpdateFood({food}) {
                  
                  <div className='flex flex-col gap-4'> 
                  <label className="label text-[#1B1A1A]/[80%] text-base font-semibold">Food Image</label>
-                 <input type="text"  className="input w-full "  placeholder="Enter photo URL" defaultValue={food.photo}
+                 <input type="text"  className="input w-full "  placeholder="Enter photo URL" defaultValue={foodData.photo}
                  name='photo' 
                  />
                  </div>
 
                      <div className='flex flex-col gap-4'> 
                  <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Food Title</label>
-                 <input type="text"  className="input w-full"  name='title' placeholder="Enter Food Title" defaultValue={food.title}/>
+                 <input type="text"  className="input w-full"  name='title' placeholder="Enter Food Title" defaultValue={foodData.title}/>
                  </div>
 
                   <div className='flex flex-col gap-4'> 
                  <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Category</label>
-                 <select className="w-full bg-base-100 select" name='category' placeholder="Enter Category" defaultValue={food.category}>
-                  <option value="">{food.category}</option>
+                 <select className="w-full bg-base-100 select" name='category' placeholder="Enter Category" defaultValue={foodData.category}>
+                  <option value="">{foodData.category}</option>
                   <option value="dairy">Dairy</option>
                   <option value="meat">Meat</option>
                   <option value="vegetables">Vegetables</option>
@@ -70,12 +72,12 @@ function UpdateFood({food}) {
 
                   <div className='flex flex-col gap-4'> 
                  <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Quantity</label>
-                 <input type="number" min="1" className="input w-full"  name='quantity' placeholder="Enter Quantity" defaultValue={food.quantity}/>
+                 <input type="number" min="1" className="input w-full"  name='quantity' placeholder="Enter Quantity" defaultValue={foodData.quantity}/>
                  </div>
                  
                   <div className='flex flex-col gap-4'> 
                  <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Expiry Date</label>
-                 <input type="date"  className="input w-full"  name='expirydate' placeholder="Enter Expiry Date" defaultValue={food.expirydate}/>
+                 <input type="date"  className="input w-full"  name='expirydate' placeholder="Enter Expiry Date" defaultValue={foodData.expirydate}/>
                  </div>
 
                 <div className=' w-full'> 
@@ -85,7 +87,7 @@ function UpdateFood({food}) {
                   placeholder="Description"
                   
                   className="textarea textarea-bordered w-full "
-                  defaultValue={food.description}
+                  defaultValue={foodData.description}
                   ></textarea>
                  </div>
 

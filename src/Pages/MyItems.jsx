@@ -104,7 +104,12 @@ function MyItems() {
     <form method="dialog">
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
-    <UpdateFood key={data._id} food={data} />
+    <UpdateFood food={data} onUpdate={(updatedFood) => {
+      const updatedList = foods.map(f =>
+        f._id === data._id ? { ...f, ...updatedFood } : f
+      );
+      setFoods(updatedList);
+    }} />
   </div>
 </dialog>
             <button className='bg-secondary text-white p-2 rounded-md cursor-pointer hover:bg-primary'

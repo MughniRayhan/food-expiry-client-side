@@ -8,8 +8,8 @@ function ExpiredFood() {
      useEffect(() => {
     fetch("http://localhost:3000/foods")
       .then(res => res.json())
-      .then(data => setFoods(data));
-  }, []);
+      .then(data => {setFoods(data)});
+  }, [])
 
      const expiredFood = foods.filter((food)=>new Date(food.expirydate) < today); 
   return (
@@ -20,7 +20,7 @@ function ExpiredFood() {
         <h2 className='text-center text-3xl text-accent font-semibold'>Expired <span className='text-secondary'>Food</span></h2>
         <div className="p-2 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {
-                expiredFood.map((food)=>
+                expiredFood.slice(0,6).map((food)=>
                  <div key={food._id} className="card  shadow-2xl bg-accent mx-auto sm:mt-4  border border-gray-100 pb-4">
   <figure className='h-40'>
     <img
