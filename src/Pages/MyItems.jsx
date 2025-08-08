@@ -56,7 +56,7 @@ function MyItems() {
       {
         foods.length<=0 && <h3 className='text-xl text-center text-white mb-3'>No Items added</h3>
       }
-  <table className="table bg-white">
+  <table className="table bg-white dark:text-black">
     
     <thead>
       <tr>

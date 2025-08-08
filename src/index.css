@@ -11,7 +11,15 @@
   --color-neutral: #2b2d42;
   --color-base-100: #edf2f4;
 }
-
+@plugin "daisyui/theme" {
+  /* Dark theme */
+  name: "dark";
+  --color-primary: #ff4d5a;
+  --color-secondary: #e53950;
+  --color-accent: #edf2f4;
+  --color-neutral: #8d99ae;
+  --color-base-100: #1a1a1a;
+}
 .poppins {
   font-family: "Poppins", sans-serif;
   font-weight: 400;

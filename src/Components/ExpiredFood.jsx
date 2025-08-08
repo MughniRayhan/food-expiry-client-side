@@ -21,7 +21,7 @@ function ExpiredFood() {
         <div className="p-2 mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {
                 expiredFood.slice(0,6).map((food)=>
-                 <div key={food._id} className="card  shadow-2xl bg-accent mx-auto sm:mt-4  border border-gray-100 pb-4">
+                 <div key={food._id} className="card  shadow-2xl bg-[#003049] mx-auto sm:mt-4  border border-gray-100 pb-4">
   <figure className='h-40'>
     <img
       src={food.photo}
@@ -32,7 +32,7 @@ function ExpiredFood() {
     <p className="text-sm text-white duration-200">Category: <span className="font-medium">{food.category}</span></p>
     <p className="text-sm text-white duration-200 my-1">Quantity: <span className="font-medium">{food.quantity}</span></p>
     
-    <div className="badge bg-primary text-white p-3">
+    <div className="badge bg-primary dark:bg-[#c71f37] text-white p-3">
       <div className="inline-grid *:[grid-area:1/1]">
   <div className="status status-error animate-ping"></div>
   <div className="status status-error"></div>
