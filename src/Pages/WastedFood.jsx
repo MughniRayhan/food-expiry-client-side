@@ -4,7 +4,7 @@ const WastedFood = () => {
   const [wastedItems, setWastedItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/wasted-food")
+    fetch("https://food-expiry-server-side.vercel.app/wasted-food")
       .then((res) => res.json())
       .then((data) => setWastedItems(data))
       .catch((err) => console.error("Error fetching wasted food:", err));
