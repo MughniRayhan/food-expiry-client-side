@@ -19,6 +19,7 @@ import PrivateRoute from './Providers/PrivateRoute.jsx';
 import Loader from './Components/Loader.jsx';
 import FoodDetails from './Components/FoodDetails.jsx';
 import UpdateFood from './Components/UpdateFood.jsx';
+import WastedFood from './Pages/WastedFood.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
        loader: ({params}) => fetch(`https://food-expiry-server-side.vercel.app/foods/${params.id}`),
        hydrateFallbackElement: <Loader/>,
        element: <PrivateRoute><UpdateFood/></PrivateRoute>
+    },
+    {
+      path: '/wasted-food',
+      Component: WastedFood
     },
     {
       path: '/login',
