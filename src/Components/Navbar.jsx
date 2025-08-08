@@ -42,8 +42,8 @@ const linksAfterLogin = <>
 </>
 
   return (
-    <nav className='w-full absolute top-0 bg-base-100 z-10'>
-        <div className="navbar bg-base-100 shadow-sm sm:px-12 px-3 ">
+    <nav className='w-full  top-0 bg-base-100 z-10 fixed'>
+        <div className="navbar bg-base-100 shadow-sm sm:px-12 px-3 absolute">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

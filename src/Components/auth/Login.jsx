@@ -30,7 +30,7 @@ const {signinWithGoogle,user,setUser, signIn,updateUser} = use(AuthContext);
       })
       .catch((error)=>{
         setErrorMsg(error.message);
-        toast.error("Oops! something went wrong")
+        
         setUser(user);
       })
       setSuccess(true);
@@ -44,7 +44,7 @@ const {signinWithGoogle,user,setUser, signIn,updateUser} = use(AuthContext);
     .catch((error) => {
       const errorMessage = error.message;
       setErrorMsg(errorMessage);
-      toast.error("Oops! something went wrong")
+      
     });
   
   }
