@@ -21,7 +21,7 @@ function NearlyExpiryItems() {
            initial={{opacity:0, y:50}}
             whileInView={{opacity:1, y:0}}
             transition={{delay:0.2, duration:1}} 
-            className='py-20 md:px-30 px-4  bg-base-200 text-base w-full '>
+            className='py-20 md:px-30 px-4  text-base w-full '>
         <h2 className='text-center text-3xl text-accent font-semibold'>Nearly <span className='text-secondary'>Expiry</span> Items</h2>
         {
             nearlyExpiry.length<=0 && 

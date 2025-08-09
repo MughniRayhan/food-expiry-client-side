@@ -54,7 +54,7 @@ function Banner() {
                      <div className=' flex flex-col justify-center items-center  gap-4  sm:pt-8   text-center w-full  '>
                   <h1 className='text-2xl  lg:w-[70%] sm:text-6xl lg:text-7xl font-bold text-white'>{data.title}</h1>
                   <p className='text-sm  text-white py-4 lg:w-[50%]'>{data.description}</p>
-                <Link to='/login'> <button className='btn btn-primary dark:bg-[#c71f37] dark:border-none '>Learn More</button></Link>
+                <Link to='/fridge'> <button className='btn btn-primary dark:bg-[#c71f37] dark:border-none '>Learn More</button></Link>
                      </div>
                      
                      </div>

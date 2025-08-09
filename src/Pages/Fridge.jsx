@@ -100,7 +100,7 @@ const filteredFoods =
 <>
 <div className='flex sm:flex-row flex-col flex-wrap justify-center items-center gap-5 mt-4'>
           <div className='bg-white rounded-2xl p-5 w-50 text-center'>
-           <h2 className=' text-3xl font-extrabold '>
+           <h2 className=' text-3xl font-extrabold text-gray-900'>
           <CountUp
            start={0}
            end={expiredFood}
@@ -110,7 +110,7 @@ const filteredFoods =
             </div>
 
            <div className='bg-white rounded-2xl p-5  w-50 text-center'>
-           <h2 className=' text-3xl font-extrabold '>
+           <h2 className=' text-3xl font-extrabold text-gray-900'>
           <CountUp
            start={0}
            end={nearlyExpired}
@@ -127,7 +127,7 @@ const filteredFoods =
         const isExpired = new Date(food.expirydate) < today;
 
         return (
-         <div key={index} className="card sm:w-96 w-full shadow-2xl bg-accent mx-auto sm:mt-4  border border-gray-100">
+         <div key={index} className="card sm:w-96 w-full shadow-2xl bg-[#003049] mx-auto sm:mt-4  border border-gray-100">
   <figure className='h-40'>
     <img
       src={food.photo}

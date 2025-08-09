@@ -21,7 +21,7 @@ function FoodUsageSuggestions() {
                 whileInView={{opacity:1, y:0}}
                 transition={{delay:0.2, duration:1}}  className='py-20 md:px-30 px-4  bg-base-200 text-base w-full'>
       <h2 className='text-center text-3xl text-accent font-semibold mb-2'>Food Usage <span className='text-secondary'>Suggestions</span></h2>
-      <p className=' text-center text-primary/80 dark:text-[#c71f37]/80 font-semibold'>These foods will expire soon. Use them quickly</p>
+      <p className=' text-center text-red-300  font-semibold'>These foods will expire soon. Use them quickly</p>
       <p className="text-center text-gray-500 mb-6">Get ideas to use foods before they expire</p>
       {
         nearlyExpiring.length <= 0 && 
@@ -36,7 +36,7 @@ function FoodUsageSuggestions() {
         nearlyExpiring.map((food, index) => (
           <div key={index} className="bg-white p-4 shadow rounded-xl">
             <img src={food.photo} alt={food.title} className="h-32 w-full object-cover rounded" />
-            <h3 className="text-lg font-semibold mt-2 text-accent">{food.title}</h3>
+            <h3 className="text-lg font-semibold mt-2 text-[#003049]">{food.title}</h3>
             <p className='text-secondary'>Expires on: <span className='text-gray-600'>{food.expirydate}</span></p>
             <p className="mt-2  text-gray-700 font-semibold">Suggestion: <span className="font-medium text-green-700 italic">"{
           

@@ -116,8 +116,8 @@ const linksAfterLogin = <>
 </>
 
   return (
-    <nav className='w-full  top-0 bg-base-200  z-10 fixed'>
-        <div className="navbar bg-base-200  shadow-sm sm:px-12 px-3 absolute">
+    <nav className='w-full  top-0   z-10 fixed'>
+        <div className="navbar bg-base-100  shadow-sm sm:px-12 px-3 absolute">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -140,7 +140,7 @@ const linksAfterLogin = <>
     </div>
    <div className='flex items-center '>
      <img className='w-10' src="https://i.ibb.co/d4vsqLQP/icons8-street-food-48.png" alt="" />
-   <h2 className='text-base sm:text-2xl text-accent dark:text-[#003049] font-bold'>Food<span className='text-primary dark:text-[#c71f37]'>Guard</span></h2>
+   <h2 className='text-base sm:text-2xl text-accent  font-bold'>Food<span className='text-primary '>Guard</span></h2>
    </div>
   </div>
   <div className="navbar-center hidden lg:flex">

@@ -15,7 +15,7 @@ function StorageTips() {
    <motion.section 
               initial={{opacity:0, y:50}}
                whileInView={{opacity:1, y:0}}
-               transition={{delay:0.2, duration:1}}  className='py-20   bg-base-200 text-base w-full'>
+               transition={{delay:0.2, duration:1}}  className='py-20    text-base w-full'>
      <h2 className='text-center text-3xl text-accent font-semibold mb-2'>Storage Tips & <span className='text-secondary'>Best Practices</span></h2>
      <div className=" py-16 px-6 mt-8" style={{
             backgroundImage: `linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(17, 17, 17, 0.6)),url("https://i.ibb.co/21q7q76S/2149565225.jpg")`,
