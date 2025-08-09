@@ -102,7 +102,7 @@ function MyItems() {
 <dialog id={`modal-${data._id}`} className="modal">
   <div className="modal-box">
     <form method="dialog">
-      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-gray-500">✕</button>
     </form>
     <UpdateFood food={data} onUpdate={(updatedFood) => {
       const updatedList = foods.map(f =>

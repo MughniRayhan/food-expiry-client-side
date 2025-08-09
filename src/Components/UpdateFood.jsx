@@ -48,20 +48,20 @@ function UpdateFood({food,onUpdate}) {
                  
                  
                  <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base font-semibold">Food Image</label>
-                 <input type="text"  className="input w-full "  placeholder="Enter photo URL" defaultValue={foodData.photo}
+                 <label className="label text-accent/80 text-base font-semibold">Food Image</label>
+                 <input type="text"  className="input w-full text-gray-500 "  placeholder="Enter photo URL" defaultValue={foodData.photo}
                  name='photo' 
                  />
                  </div>
 
                      <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Food Title</label>
-                 <input type="text"  className="input w-full"  name='title' placeholder="Enter Food Title" defaultValue={foodData.title}/>
+                 <label className="label text-accent/80 text-base  font-semibold">Food Title</label>
+                 <input type="text"  className="input w-full text-gray-500"  name='title' placeholder="Enter Food Title" defaultValue={foodData.title}/>
                  </div>
 
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Category</label>
-                 <select className="w-full bg-base-100 select" name='category' placeholder="Enter Category" defaultValue={foodData.category}>
+                 <label className="label text-accent/80 text-base  font-semibold">Category</label>
+                 <select className="w-full bg-base-100 select text-gray-500" name='category' placeholder="Enter Category" defaultValue={foodData.category}>
                   <option value="">{foodData.category}</option>
                   <option value="dairy">Dairy</option>
                   <option value="meat">Meat</option>
@@ -71,22 +71,22 @@ function UpdateFood({food,onUpdate}) {
                  </div>
 
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Quantity</label>
-                 <input type="number" min="1" className="input w-full"  name='quantity' placeholder="Enter Quantity" defaultValue={foodData.quantity}/>
+                 <label className="label text-accent/80  text-base font-semibold">Quantity</label>
+                 <input type="number" min="1" className="input w-full text-gray-500"  name='quantity' placeholder="Enter Quantity" defaultValue={foodData.quantity}/>
                  </div>
                  
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Expiry Date</label>
-                 <input type="date"  className="input w-full"  name='expirydate' placeholder="Enter Expiry Date" defaultValue={foodData.expirydate}/>
+                 <label className="label text-accent/80  text-base font-semibold">Expiry Date</label>
+                 <input type="date"  className="input w-full text-gray-500"  name='expirydate' placeholder="Enter Expiry Date" defaultValue={foodData.expirydate}/>
                  </div>
 
                 <div className=' w-full'> 
-                 
+                  <label className="label text-accent/80  text-base font-semibold">Description</label>
                   <textarea
                   name="description"
                   placeholder="Description"
                   
-                  className="textarea textarea-bordered w-full "
+                  className="textarea textarea-bordered w-full text-gray-500"
                   defaultValue={foodData.description}
                   ></textarea>
                  </div>
@@ -94,8 +94,8 @@ function UpdateFood({food,onUpdate}) {
                    
 
                    <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">User Email</label>
-                 <input type="email"  className="input w-full"  name='email' readOnly defaultValue={user ? user.email : ""} />
+                 <label className="label text-accent/80  text-base font-semibold">User Email</label>
+                 <input type="email"  className="input w-full text-gray-500"  name='email' readOnly defaultValue={user ? user.email : ""} />
                  </div>
                    
                 

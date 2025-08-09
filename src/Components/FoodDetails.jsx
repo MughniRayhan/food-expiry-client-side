@@ -78,7 +78,7 @@ function FoodDetails() {
 
   return (
     <div className='sm:p-30 py-20 px-4  bg-base-200'>
-        <div className='md:w-[80%] w-full mx-auto border border-accent/20 shadow-xl rounded-2xl p-6 flex flex-col md:flex-row justify-center items-center gap-5 bg-base-100'>
+        <div className='md:w-[80%] w-full mx-auto border border-accent/20 shadow-xl rounded-2xl p-6 flex flex-col md:flex-row justify-center items-center gap-8 bg-base-100'>
             <img src={food.photo} alt="" className='sm:w-[300px] w-full sm:h-[300px] h-60 rounded-2xl' />
             <div className='flex flex-col '>
                 <h2 className='sm:text-2xl text-accent font-semibold '>{food.title}</h2>
@@ -91,46 +91,26 @@ function FoodDetails() {
                 <div>
                   <p className="badge badge-error text-base  text-white p-4 mt-4">Expired</p>
                 
-                    <div className='mt-4'>
-                  <p className='text-secondary text-sm font-medium mb-1'>Time Left : </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4  text-center">
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
-    <p className="text-3xl font-semibold">{days}</p>
-    <p className="text-sm uppercase">Days</p>
-  </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
-    <p className="text-3xl font-semibold">{hours}</p>
-    <p className="text-sm uppercase">Hours</p>
-  </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
-    <p className="text-3xl font-semibold">{minutes}</p>
-    <p className="text-sm uppercase">Minutes</p>
-  </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
-    <p className="text-3xl font-semibold">{seconds}</p>
-    <p className="text-sm uppercase">Seconds</p>
-  </div>
-</div>
-                </div>
+                    
                   </div>
                 
                 :
                 <div className='mt-4'>
                   <p className='text-secondary text-sm font-medium mb-1'>Time Left : </p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4  text-center">
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
+  <div className="bg-accent text-base-100 p-4 rounded-xl shadow">
     <p className="text-3xl font-semibold">{days}</p>
     <p className="text-sm uppercase">Days</p>
   </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
+  <div className="bg-accent text-base-100 p-4 rounded-xl shadow">
     <p className="text-3xl font-semibold">{hours}</p>
     <p className="text-sm uppercase">Hours</p>
   </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
+  <div className="bg-accent text-base-100 p-4 rounded-xl shadow">
     <p className="text-3xl font-semibold">{minutes}</p>
     <p className="text-sm uppercase">Minutes</p>
   </div>
-  <div className="bg-accent text-white p-4 rounded-xl shadow">
+  <div className="bg-accent text-base-100 p-4 rounded-xl shadow">
     <p className="text-3xl font-semibold">{seconds}</p>
     <p className="text-sm uppercase">Seconds</p>
   </div>
