@@ -52,14 +52,14 @@ function MyItems() {
 
   
   return (
-    <div className="overflow-x-auto bg-accent p-20 pt-30">
+    <div className="overflow-x-auto bg-[#003049] p-20 pt-30">
       {
         foods.length<=0 && <h3 className='text-xl text-center text-white mb-3'>No Items added</h3>
       }
   <table className="table bg-white dark:text-black">
     
     <thead>
-      <tr>
+      <tr className='text-gray-500'>
         <th></th>
         <th>Product</th>
         <th>Category</th>

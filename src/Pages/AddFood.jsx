@@ -50,19 +50,19 @@ function AddFood() {
                  
                  
                  <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base font-semibold">Food Image</label>
+                 <label className="label text-accent/80 text-base font-semibold">Food Image</label>
                  <input type="text"  className="input w-full "  placeholder="Enter photo URL" 
                  name='photo' required
                  />
                  </div>
 
                      <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Food Title</label>
+                 <label className="label text-accent/80 text-base  font-semibold">Food Title</label>
                  <input type="text"  className="input w-full"  name='title' placeholder="Enter Food Title" required />
                  </div>
 
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%] text-base  font-semibold">Category</label>
+                 <label className="label text-accent/80 text-base  font-semibold">Category</label>
                  <select className="w-full bg-base-100 select" name='category' placeholder="Enter Category" required>
                   <option value="">Select Category</option>
                   <option value="dairy">Dairy</option>
@@ -73,12 +73,12 @@ function AddFood() {
                  </div>
 
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Quantity</label>
+                 <label className="label text-accent/80  text-base font-semibold">Quantity</label>
                  <input type="number" min="1" className="input w-full"  name='quantity' placeholder="Enter Quantity" required/>
                  </div>
                  
                   <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Expiry Date</label>
+                 <label className="label text-accent/80  text-base font-semibold">Expiry Date</label>
                  <input type="date"  className="input w-full"  name='expirydate' placeholder="Enter Expiry Date" required/>
                  </div>
 
@@ -94,12 +94,12 @@ function AddFood() {
                  </div>
 
                    <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">Added Date</label>
+                 <label className="label text-accent/80  text-base font-semibold">Added Date</label>
                  <input type="date" name="addedDate" value={today} className="input w-full"  readOnly  />
                  </div>
 
                    <div className='flex flex-col gap-4'> 
-                 <label className="label text-[#1B1A1A]/[80%]  text-base font-semibold">User Email</label>
+                 <label className="label text-accent/80  text-base font-semibold">User Email</label>
                  <input type="email"  className="input w-full"  name='email' readOnly defaultValue={user ? user.email : ""} />
                  </div>
                    

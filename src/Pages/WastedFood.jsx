@@ -11,20 +11,21 @@ const WastedFood = () => {
   }, []);
 
   return (
-    <div className="  p-4 mt-20 bg-base-300">
-      <h2 className='text-4xl font-semibold text-center mx-auto text-accent pb-3'>Wasted Food Tracker</h2>
+    <div className="  p-4 py-28 bg-base-300">
+      <h2 className='text-3xl font-semibold text-center mx-auto text-accent pb-3'>Wasted Foods </h2>
       <div className="max-w-7xl mx-auto mt-4">
         {wastedItems.length === 0 ? (
         <p>No wasted food items found.</p>
       ) : (
         <ul className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-5">
-          {wastedItems.map((item) => (
+          {wastedItems.slice(0,9).map((item) => (
             <li
               key={item._id}
               className=" p-6 text-center shadow-sm bg-white rounded-xl"
             >
-              <h3 className="text-lg font-semibold">{item.name}</h3>
-              <p className="text-accent text-xl ">Category: {item.category}</p>
+              <img src={item.photo} alt="" className="w-full h-[200px] object-cover rounded-xl"/>
+              <p className="text-[#003049] text-lg font-semibold"> {item.title}</p>
+              <p className="text-gray-700 text-base ">Category: {item.category}</p>
               <p className="text-secondary">Expired on: {item.expirydate}</p>
               <p className="text-sm text-gray-600">Reason: {item.reason || "Not specified"}</p>
             </li>
