@@ -147,7 +147,7 @@ function FoodDetails() {
         {
             notesList.map((note,index)=>(
                 <div key={index} className='flex gap-5 justify-between bg-white border border-gray-200 rounded-2xl p-4 mt-2 sm:text-base text-sm'>
-                    <p className=' font-medium'>{note.text}</p>
+                    <p className=' font-medium text-gray-800'>{note.text}</p>
                     <p className='text-secondary'>Posted: {new Date(note.date).toLocaleDateString()}</p>
                 </div>
             
