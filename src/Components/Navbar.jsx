@@ -1,14 +1,14 @@
 import React, { use, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
-import { AuthContext } from '../Providers/AuthProvider'
 import { toast } from 'react-toastify';
+import UseAuth from '../Hooks/UseAuth';
 
 
 function Navbar() {
-const {user,setUser,logOut} = use(AuthContext)
+const {user,setUser,logOut} = UseAuth()
 const [name,setName] = useState("")
  const [theme, setTheme] = useState("light");
-
+console.log(user)
 useEffect(()=>{
  if (user?.displayName) {
       setName(user.displayName);

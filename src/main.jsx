@@ -20,6 +20,7 @@ import Loader from './Components/Loader.jsx';
 import FoodDetails from './Components/FoodDetails.jsx';
 import UpdateFood from './Components/UpdateFood.jsx';
 import WastedFood from './Pages/WastedFood.jsx';
+import Forbidden from './Pages/Forbidden.jsx';
 
 const router = createBrowserRouter([
   {
@@ -70,7 +71,11 @@ const router = createBrowserRouter([
     {
       path: '/register',
       Component: Register
-    }
+    },
+    {
+        path: '/forbidden',
+        Component: Forbidden
+      }
    ]
   },
 ]);
