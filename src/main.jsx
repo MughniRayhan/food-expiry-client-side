@@ -7,20 +7,24 @@ import {
   RouterProvider,
 } from "react-router";
 import Root from './Layouts/Root.jsx';
-import Home from './Pages/Home.jsx';
+import Forbidden from './Pages/Forbidden.jsx';
+import Home from './Pages/Home/Home.jsx';
 import Fridge from './Pages/Fridge.jsx';
-import Login from './Components/auth/Login.jsx';
-import Register from './Components/auth/Register.jsx';
-import AuthProvider from './Providers/AuthProvider.jsx';
-import ErrorPage from './Pages/ErrorPage.jsx';
 import AddFood from './Pages/AddFood.jsx';
 import MyItems from './Pages/MyItems.jsx';
-import PrivateRoute from './Providers/PrivateRoute.jsx';
-import Loader from './Components/Loader.jsx';
-import FoodDetails from './Components/FoodDetails.jsx';
-import UpdateFood from './Components/UpdateFood.jsx';
+import FoodDetails from './Pages/FoodDetails.jsx';
+import UpdateFood from './Pages/UpdateFood.jsx';
 import WastedFood from './Pages/WastedFood.jsx';
-import Forbidden from './Pages/Forbidden.jsx';
+import Login from './Pages/auth/Login.jsx';
+import Register from './Pages/auth/Register.jsx';
+import ErrorPage from './Pages/ErrorPage.jsx';
+import Loader from './Components/Loader.jsx';
+import PrivateRoute from './Providers/PrivateRoute.jsx';
+import AuthProvider from './Providers/AuthProvider.jsx';
+import DashboardLayout from './Layouts/DashboardLayout.jsx';
+import AdminRoute from './Routes/AdminRoute.jsx';
+import AllUsers from './Pages/Dashboard/AllUsers/AllUsers.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const router = createBrowserRouter([
   {
@@ -78,13 +82,26 @@ const router = createBrowserRouter([
       }
    ]
   },
+  {
+    path: '/dashboard',
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>, 
+    children: [
+      {
+        path: 'allUsers',
+        element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+      }
+    ]
+  }
 ]);
 
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

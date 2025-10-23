@@ -1,10 +1,10 @@
 import React, { use, useState } from 'react'
 import { Link, useLoaderData } from 'react-router'
-import { AuthContext } from '../Providers/AuthProvider';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import UpdateFood from '../Components/UpdateFood';
 import Swal from 'sweetalert2';
+import UpdateFood from './UpdateFood';
+import { AuthContext } from '../Providers/AuthProvider';
 
 function MyItems() {
   const allFoods = useLoaderData();

@@ -45,7 +45,7 @@ function Banner() {
                   <Slider {...settings}>
                  {SlideList.map((data)=>(
                     <div key={data.id}>
-                        <div className=' flex  pt-12 sm:px-20 px-8 place-items-center justify-center md:justify-start h-[400px] sm:h-[650px] w-full' 
+                        <div className=' flex  pt-12 sm:px-20 px-8 place-items-center justify-center md:justify-start h-[400px] sm:h-[750px] w-full' 
                         style={{
             backgroundImage: `linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(17, 17, 17, 0.6)),url(${data.img})`,
             backgroundSize: "cover",

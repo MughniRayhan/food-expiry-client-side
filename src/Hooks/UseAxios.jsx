@@ -3,7 +3,7 @@ import React from 'react'
 
 function UseAxios() {
     const axiosInstance = axios.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'https://food-expiry-server-side.vercel.app'
     })
   return axiosInstance;
 }

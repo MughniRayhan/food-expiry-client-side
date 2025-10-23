@@ -8,7 +8,6 @@ function Navbar() {
 const {user,setUser,logOut} = UseAuth()
 const [name,setName] = useState("")
  const [theme, setTheme] = useState("light");
-console.log(user)
 useEffect(()=>{
  if (user?.displayName) {
       setName(user.displayName);

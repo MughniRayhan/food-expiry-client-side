@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import UseAxios from "../../Hooks/UseAxios";
 import UseAuth from "../../Hooks/UseAuth";
+import UseAxios from "../../Hooks/UseAxios";
 
 function Register() {
   const { createUser, setUser, updateUser, signinWithGoogle } = UseAuth();

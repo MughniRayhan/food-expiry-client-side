@@ -1,7 +1,7 @@
 import React, { use, useState } from 'react'
-import { AuthContext } from '../Providers/AuthProvider';
 import { toast } from 'react-toastify';
-import Loader from './Loader';
+import Loader from '../Components/Loader';
+import { AuthContext } from '../Providers/AuthProvider';
 
 function UpdateFood({food,onUpdate}) {
     const {user} = use(AuthContext);
