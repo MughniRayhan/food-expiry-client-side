@@ -2,13 +2,14 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import UseAuth from "../../Hooks/UseAuth";
+import UseAxios from "../../Hooks/UseAxios";
 
 function Login() {
   const { signinWithGoogle, signIn, setUser } = UseAuth();
   const [errorMsg, setErrorMsg] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
+ const axiosPublic = UseAxios();
   // 🔹 Handle login with email & password
   const handleLogin = (e) => {
     e.preventDefault();
@@ -34,22 +35,30 @@ function Login() {
   };
 
   // 🔹 Handle Google Sign-in
-  const handleSigninWithGoogle = () => {
-    signinWithGoogle()
-      .then((result) => {
+  const handleSigninWithGoogle = async () => {
+      try {
+        const result = await signinWithGoogle();
         const user = result.user;
         setUser(user);
-        Swal.fire({
-          title: "Successfully Logged In!",
-          icon: "success",
-          draggable: true,
+  
+        // ✅ Save user to MongoDB
+        await axiosPublic.post("/users", {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "user",
         });
-        navigate(location.state?.from || "/");
-      })
-      .catch((error) => {
+  
+        Swal.fire({
+          title: "Logged in successfully!",
+          icon: "success",
+        });
+        navigate(location.state ? location.state : "/");
+      } catch (error) {
         setErrorMsg(error.message);
-      });
-  };
+        toast.error("Google sign-in failed");
+      }
+    };
 
   return (
     <div className="flex justify-center items-center min-h-screen p-5 bg-base-300">

@@ -162,7 +162,7 @@ const linksAfterLogin = <>
  {
   user?
   <>
- <div className='group flex-col justify-center items-center'>
+ <Link to='/dashboard' className='group flex-col justify-center items-center'>
    <img src={user?.photoURL} alt="" className='rounded-full sm:w-10 w-8 relative'/>
   <div className='bg-white text-sm p-3 text-accent hidden group-hover:block top-16  absolute'>
    
@@ -177,7 +177,7 @@ const linksAfterLogin = <>
         </p>
       }
    </div>
- </div>
+ </Link>
    <Link to='/'>
   <button onClick={handleLogOut}
   className="sm:border sm:border-secondary   text-primary   sm:px-5 sm:py-2 sm:rounded-md  sm:text-base text-sm   cursor-pointer sm:hover:text-white  sm:hover:bg-primary  duration-200">

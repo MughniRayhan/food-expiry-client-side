@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { ToastContainer} from 'react-toastify';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -25,6 +26,8 @@ import DashboardLayout from './Layouts/DashboardLayout.jsx';
 import AdminRoute from './Routes/AdminRoute.jsx';
 import AllUsers from './Pages/Dashboard/AllUsers/AllUsers.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome.jsx';
+import MyProfile from './Pages/Dashboard/MyProfile/MyProfile';
 
 const router = createBrowserRouter([
   {
@@ -87,8 +90,16 @@ const router = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>, 
     children: [
       {
+        index: true,
+        Component: DashboardHome
+      },
+      {
         path: 'allUsers',
         element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+      },
+      {
+        path: 'myprofile',
+        Component: MyProfile
       }
     ]
   }
@@ -98,6 +109,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ToastContainer/>
     <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <RouterProvider router={router} />
