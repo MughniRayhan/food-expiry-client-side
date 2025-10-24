@@ -23,41 +23,41 @@ export default function UserDashboard() {
     enabled: !!axiosSecure && !!userEmail,
   });
 
-  // Filter expired and nearly expired
   const today = new Date();
+
   const expiredFoods = useMemo(
     () => foods.filter(f => new Date(f.expirydate) < today),
     [foods]
   );
 
   const nearlyExpiredFoods = useMemo(
-    () =>
-      foods.filter(f => {
-        const expiry = new Date(f.expirydate);
-        const fiveDaysLater = new Date(today);
-        fiveDaysLater.setDate(today.getDate() + 5);
-        return expiry >= today && expiry <= fiveDaysLater;
-      }),
+    () => foods.filter(f => {
+      const expiry = new Date(f.expirydate);
+      const fiveDaysLater = new Date(today);
+      fiveDaysLater.setDate(today.getDate() + 5);
+      return expiry >= today && expiry <= fiveDaysLater;
+    }),
     [foods]
   );
 
-  // Weekly expiry trend chart
-  const weeklyData = useMemo(() => {
+  // Recent Activities for graph (last 7 days)
+  const recentActivityData = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
       date.setDate(today.getDate() - (6 - i));
       const dateStr = date.toISOString().split("T")[0];
 
+      const addedFoods = foods.filter(f => f.addedDate === dateStr).length;
       const expiredCount = foods.filter(f => f.expirydate === dateStr && new Date(f.expirydate) < today).length;
 
       return {
         name: date.toLocaleDateString("en-US", { weekday: "short" }),
+        added: addedFoods,
         expired: expiredCount,
       };
     });
   }, [foods, today]);
 
-  // Category distribution
   const categoryData = useMemo(() => {
     const categoryMap = foods.reduce((acc, f) => {
       acc[f.category] = (acc[f.category] || 0) + 1;
@@ -105,22 +105,25 @@ export default function UserDashboard() {
 
       {/* --- Charts --- */}
       <div className="grid md:grid-cols-2 gap-6">
+        {/* Recent Activities Graph */}
         <Card>
           <CardHeader>
-            <CardTitle>Weekly Expiry Trend</CardTitle>
+            <CardTitle>Recent Activities (Last 7 Days)</CardTitle>
           </CardHeader>
           <CardContent className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={weeklyData}>
+              <BarChart data={recentActivityData}>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="expired" fill="#ef4444" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="added" fill="#3b82f6" name="Foods Added" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="expired" fill="#ef4444" name="Expired Foods" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
+        {/* Category Pie Chart */}
         <Card>
           <CardHeader>
             <CardTitle>Foods by Category</CardTitle>
@@ -148,36 +151,6 @@ export default function UserDashboard() {
           </CardContent>
         </Card>
       </div>
-
-      {/* --- Recent Activities --- */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activities</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <table className="min-w-full text-sm text-gray-600">
-            <thead className="border-b font-semibold">
-              <tr>
-                <th className="py-2 text-left">Food</th>
-                <th className="py-2 text-left">Status</th>
-                <th className="py-2 text-left">Expiry Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foods
-                .slice(-5)
-                .reverse()
-                .map((f, idx) => (
-                  <tr key={idx} className="border-b">
-                    <td className="py-2">{f.title}</td>
-                    <td>{new Date(f.expirydate) < today ? "Expired" : "Active"}</td>
-                    <td>{f.expirydate}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
     </div>
   );
 }

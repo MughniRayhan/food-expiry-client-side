@@ -6,6 +6,7 @@ import {
   FaUserCircle,
   FaBell,
   FaHourglassHalf,
+  FaBoxOpen,
 } from "react-icons/fa";
 import useUserRole from "../Hooks/useUserRole";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -149,6 +150,10 @@ function DashboardLayout() {
               <NavLink to="/dashboard/allUsers" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
                 <FaUsers /> All Users
               </NavLink>
+
+              <NavLink to="/dashboard/allFoods" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
+                  <FaBoxOpen /> All Foods
+               </NavLink>
             </>
           )}
         </ul>

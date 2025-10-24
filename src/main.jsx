@@ -31,6 +31,7 @@ import MyProfile from './Pages/Dashboard/MyProfile/MyProfile';
 import NearlyExpiryItems from './Pages/Dashboard/NearlyExpiry/NearlyExpiryItems';
 import AiRecipesPage from './Pages/AiRecipesPage';
 import SavedRecipesPage from './Pages/Dashboard/SavedRecipes/SavedRecipesPage';
+import AllFoods from './Pages/Dashboard/AllFoods/AllFoods';
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: 'allUsers',
         element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+      },
+      {
+        path: 'allFoods',
+        element:<AdminRoute><AllFoods></AllFoods></AdminRoute>
       },
       {
         path: 'myprofile',

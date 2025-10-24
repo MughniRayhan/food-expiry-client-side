@@ -1,7 +1,22 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 import { Users, AlertTriangle, Utensils, Trash2 } from "lucide-react";
 import UseAxiosSecure from "@/Hooks/UseAxiosSecure";
 
@@ -17,7 +32,7 @@ export default function AdminDashboard() {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
-    enabled: !!axiosSecure, // wait until axiosSecure is ready
+    enabled: !!axiosSecure,
   });
 
   // Fetch foods
@@ -50,26 +65,22 @@ export default function AdminDashboard() {
     enabled: !!axiosSecure,
   });
 
-  // Prepare weekly chart data
-  const weeklyData = useMemo(() => {
-    const today = new Date();
-    return Array.from({ length: 7 }, (_, i) => {
-      const date = new Date();
-      date.setDate(today.getDate() - (6 - i));
-      const dateStr = date.toISOString().split("T")[0];
-
-      const expiredCount = foods.filter(f => f.expirydate === dateStr && new Date(f.expirydate) < today).length;
-      const wastedCount = wastedFoods.filter(f => f.expirydate === dateStr).length;
-
-      return {
-        name: date.toLocaleDateString("en-US", { weekday: "short" }),
-        expired: expiredCount,
-        wasted: wastedCount,
-      };
+  // Prepare top users by added foods
+  const topUsersData = useMemo(() => {
+    const countMap = {};
+    foods.forEach((f) => {
+      countMap[f.email] = (countMap[f.email] || 0) + 1;
     });
-  }, [foods, wastedFoods]);
+    const sortedUsers = Object.entries(countMap)
+      .map(([email, count]) => {
+        const user = users.find((u) => u.email === email);
+        return { name: user?.displayName || email, addedFoods: count };
+      })
+      .sort((a, b) => b.addedFoods - a.addedFoods);
+    return sortedUsers.slice(0, 5); // Top 5 users
+  }, [foods, users]);
 
-  // Prepare pie chart data
+  // Pie chart data for wasted food by category
   const categoryData = useMemo(() => {
     const categoryMap = wastedFoods.reduce((acc, f) => {
       acc[f.category] = (acc[f.category] || 0) + 1;
@@ -127,23 +138,24 @@ export default function AdminDashboard() {
 
       {/* Charts */}
       <div className="grid md:grid-cols-2 gap-6">
+        {/* Top Users by Added Foods (Bar Chart) */}
         <Card>
           <CardHeader>
-            <CardTitle>Weekly Expiry & Waste Trends</CardTitle>
+            <CardTitle>Top Users by Added Foods</CardTitle>
           </CardHeader>
           <CardContent className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={weeklyData}>
+              <BarChart data={topUsersData}>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="expired" fill="#3b82f6" radius={[6, 6, 0, 0]} />
-                <Bar dataKey="wasted" fill="#ef4444" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="addedFoods" fill="#3b82f6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
+        {/* Wasted Food by Category */}
         <Card>
           <CardHeader>
             <CardTitle>Wasted Food by Category</CardTitle>
@@ -162,7 +174,10 @@ export default function AdminDashboard() {
                   label
                 >
                   {categoryData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -172,32 +187,7 @@ export default function AdminDashboard() {
         </Card>
       </div>
 
-      {/* Recent Activities */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activities</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <table className="min-w-full text-sm text-gray-600">
-            <thead className="border-b font-semibold">
-              <tr>
-                <th className="py-2 text-left">User</th>
-                <th className="py-2 text-left">Action</th>
-                <th className="py-2 text-left">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.slice(-5).map((user, idx) => (
-                <tr key={idx} className="border-b">
-                  <td className="py-2">{user.displayName || user.email}</td>
-                  <td>Joined the system</td>
-                  <td>Just now</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
+     
     </div>
   );
 }
