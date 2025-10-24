@@ -42,6 +42,11 @@ nav a.active {
   @apply border-secondary;
 }
 
+.dashboard_page.active {
+  background-color: #7789a970;
+  padding: 2px 8px;
+}
+
 :root {
   --primary: #c71f37;
   --primary-foreground: white;

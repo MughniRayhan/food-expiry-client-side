@@ -21,7 +21,7 @@ const AITipButton = ({ foodName, expiryDate }) => {
   };
 
   return (
-    <div className="border p-4 rounded-md shadow-sm bg-white">
+    <div className=" p-4 rounded-md shadow-sm ">
       <button
         onClick={getTip}
         disabled={loading}
@@ -46,7 +46,7 @@ const AITipButton = ({ foodName, expiryDate }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-3 text-gray-700 italic bg-gray-100 p-2 rounded"
+            className=" text-gray-700 italic bg-gray-100 p-2 rounded"
           >
             {tip}
           </motion.p>

@@ -1,20 +1,19 @@
 import React from 'react'
 import Banner from './Banner'
-import NearlyExpiryItems from './NearlyExpiryItems'
 import ExpiredFood from './ExpiredFood'
 import StorageTips from './StorageTips'
-import FoodUsageSuggestions from './FoodUsageSuggestions'
+import Faq from './Faq'
+import Tips from './Tips'
 
 function Home() {
   
   return (
     <div>
       <Banner/>
-      <NearlyExpiryItems/>
       <ExpiredFood/>
       <StorageTips/>
-      <FoodUsageSuggestions/>
-      
+      <Tips/>
+      <Faq/>
     </div>
   )
 }

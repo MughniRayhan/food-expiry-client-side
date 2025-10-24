@@ -5,6 +5,7 @@ import {
   FaUsers,
   FaUserCircle,
   FaBell,
+  FaHourglassHalf,
 } from "react-icons/fa";
 import useUserRole from "../Hooks/useUserRole";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -112,7 +113,7 @@ function DashboardLayout() {
           className="drawer-overlay"
         ></label>
 
-        <ul className="menu bg-base-200 min-h-full sm:w-80 w-[80%] p-4">
+        <ul className="menu bg-accent/10 min-h-full sm:w-80 w-[80%] p-4">
           <div className="mb-4 hidden lg:block border-b border-base-100/30 pb-4">
             <Link to="/" className="flex items-center ">
               <img
@@ -126,17 +127,21 @@ function DashboardLayout() {
             </Link>
           </div>
 
-          <NavLink to="/dashboard" className="flex items-center gap-2 mt-5 text-lg">
+          <NavLink to="/dashboard" className=" flex items-center gap-2 mt-5 text-lg">
             <FaTachometerAlt /> Dashboard
           </NavLink>
 
-          <NavLink to="/dashboard/myProfile" className="flex items-center gap-2 mt-5 text-lg">
+          <NavLink to="/dashboard/myProfile" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
             <FaUserCircle /> My Profile
+          </NavLink>
+
+          <NavLink to="/dashboard/nearly-expiry-items" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
+            <FaHourglassHalf /> Nearly Expiry Items
           </NavLink>
 
           {!roleLoading && role === "admin" && (
             <>
-              <NavLink to="/dashboard/allUsers" className="flex items-center gap-2 mt-5 text-lg">
+              <NavLink to="/dashboard/allUsers" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
                 <FaUsers /> All Users
               </NavLink>
             </>
