@@ -41,7 +41,7 @@ const  SlideList = [
 
 function Banner() {
    return (
-    <div className='  w-full mx-auto pb-10'>
+    <div className='  w-full mx-auto '>
                   <Slider {...settings}>
                  {SlideList.map((data)=>(
                     <div key={data.id}>
