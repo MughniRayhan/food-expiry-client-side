@@ -114,9 +114,9 @@ function Fridge() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-r from-red-600 to-red-400 text-white rounded-2xl p-5 w-52 text-center shadow-lg shadow-red-900/40"
+              className="bg-white text-gray-800 rounded-2xl p-5 w-52 text-center shadow-lg "
             >
-              <h2 className="text-3xl font-extrabold">
+              <h2 className="text-4xl font-extrabold">
                 <CountUp start={0} end={expiredFood} duration={2.5} />+
               </h2>
               <p className="opacity-80 font-medium mt-1">Expired Food</p>
@@ -126,9 +126,9 @@ function Fridge() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-r from-yellow-600 to-yellow-400 text-white rounded-2xl p-5 w-52 text-center shadow-lg shadow-yellow-900/40"
+              className="bg-white text-gray-800 rounded-2xl p-5 w-52 text-center shadow-lg"
             >
-              <h2 className="text-3xl font-extrabold">
+              <h2 className="text-4xl font-extrabold">
                 <CountUp start={0} end={nearlyExpired} duration={2.5} />+
               </h2>
               <p className="opacity-80 font-medium mt-1">Nearly Expiry Food</p>

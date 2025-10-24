@@ -11,6 +11,7 @@ import useUserRole from "../Hooks/useUserRole";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { BookOpen } from "lucide-react";
+import NotificationBar from "@/Components/NotificationBar/NotificationBar";
 
 function DashboardLayout() {
   const { role, roleLoading } = useUserRole();
@@ -69,9 +70,8 @@ function DashboardLayout() {
           <div className="flex items-center gap-4 mr-4">
             {/* 🔔 Notifications */}
             <div className="relative cursor-pointer">
-              <FaBell className="text-2xl text-gray-700 hover:text-primary transition" />
-              {/* Optional red dot */}
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <NotificationBar userEmail={user.email} />
+             
             </div>
 
             {/* 👤 Profile dropdown */}

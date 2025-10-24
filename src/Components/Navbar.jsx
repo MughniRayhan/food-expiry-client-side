@@ -10,6 +10,11 @@ function Navbar() {
 const {user,setUser,logOut} = UseAuth()
 const [name,setName] = useState("")
  const [theme, setTheme] = useState("light");
+ const [open, setOpen] = useState(false);
+
+  const toggleDropdown = () => setOpen(!open);
+  const closeDropdown = () => setOpen(false);
+
 useEffect(()=>{
  if (user?.displayName) {
       setName(user.displayName);
@@ -175,43 +180,71 @@ const linksAfterLogin = <>
 {toggle}
 </label>
 
- {
-  user?
-  <>
- <Link to='/dashboard' className='group flex-col justify-center items-center'>
-   <img src={user?.photoURL} alt="" className='rounded-full sm:w-10 w-8 relative'/>
-  <div className='bg-white text-sm p-3 text-accent hidden group-hover:block top-16  absolute'>
-   
-      {
-        user.displayName?
-        <p>
-          {user.displayName}
-        </p>
-        :
-        <p>
-          Guest User
-        </p>
-      }
-   </div>
- </Link>
-   <Link to='/'>
-  <button onClick={handleLogOut}
-  className="sm:border sm:border-secondary   text-primary   sm:px-5 sm:py-2 sm:rounded-md  sm:text-base text-sm   cursor-pointer sm:hover:text-white  sm:hover:bg-primary  duration-200">
-    Logout
-  </button></Link>
 
-  </>
-  :
-  <>
-     <Link to='/login'>
-  <button className="sm:border sm:border-secondary   text-primary   sm:px-5 sm:py-2 sm:rounded-md  sm:text-base text-sm   cursor-pointer sm:hover:text-white  sm:hover:bg-primary  duration-200">
-    Login
-  </button></Link>
-  <Link to='/register'>
-  <button className="sm:border sm:border-secondary  text-primary  sm:px-5 sm:py-2 sm:rounded-md  sm:text-base text-sm   cursor-pointer  sm:hover:text-white sm:hover:bg-primary    duration-200">
-    Register
-</button></Link></>
- }
+
+
+  {user ? (
+        <div className="relative">
+          {/* Profile Avatar */}
+          <button
+            onClick={toggleDropdown}
+            className="focus:outline-none flex items-center"
+          >
+            <img
+              src={
+                user?.photoURL ||
+                "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              }
+              alt="Profile"
+              className="rounded-full sm:w-10 w-8 border-2 border-secondary glow-avatar transition-transform duration-300 hover:scale-105"
+            />
+          </button>
+
+          {/* Dropdown Menu */}
+          {open && (
+            <div
+              className="absolute right-0 top-12 bg-white shadow-lg rounded-lg flex flex-col w-44 py-2 text-gray-700 z-50 animate-fadeIn"
+              onMouseLeave={closeDropdown}
+            >
+              <p className="px-4 py-2 text-sm text-center border-b border-gray-200">
+                {user?.displayName || "Guest User"}
+              </p>
+
+              <Link
+                to="/dashboard"
+                onClick={closeDropdown}
+                className="px-4 py-2 hover:bg-secondary hover:text-white text-center transition-all duration-200"
+              >
+                Dashboard
+              </Link>
+
+              <button
+                onClick={() => {
+                  handleLogOut();
+                  closeDropdown();
+                }}
+                className="px-4 py-2 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200"
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <>
+          <Link to="/login">
+            <button className="sm:border sm:border-secondary text-primary sm:px-5 sm:py-2 sm:rounded-md sm:text-base text-sm cursor-pointer sm:hover:text-white sm:hover:bg-primary duration-200">
+              Login
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="sm:border sm:border-secondary text-primary sm:px-5 sm:py-2 sm:rounded-md sm:text-base text-sm cursor-pointer sm:hover:text-white sm:hover:bg-primary duration-200">
+              Register
+            </button>
+          </Link>
+        </>
+      )}
+
 </div>
   </div>
 </nav>
