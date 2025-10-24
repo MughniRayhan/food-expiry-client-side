@@ -54,7 +54,7 @@ function MyItems() {
   return (
     <div className="overflow-x-auto bg-base-100 p-20 pt-30">
       {
-        foods.length<=0 && <h3 className='text-xl text-center text-white mb-3'>No Items added</h3>
+        foods.length<=0 && <h3 className='text-xl text-center text-accent mb-3'>No Items added</h3>
       }
   <table className="table bg-base-200 dark:text-black">
     

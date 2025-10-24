@@ -1,24 +1,55 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import UseAuth from "../../Hooks/UseAuth";
 import UseAxios from "../../Hooks/UseAxios";
+import axios from "axios";
 
 function Register() {
   const { createUser, setUser, updateUser, signinWithGoogle } = UseAuth();
-  const axiosPublic = UseAxios(); // ✅ instance for API calls
+  const axiosPublic = UseAxios(); // API instance
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(""); // Uploaded image URL
+  const [uploading, setUploading] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Upload file to ImgBB
+  const handleUploadImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const uploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
+
+    try {
+      setUploading(true);
+      const res = await axios.post(uploadUrl, formData);
+      setPhotoUrl(res.data.data.display_url);
+      toast.success("Profile photo uploaded!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to upload image");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
-    const photoUrl = e.target.photoUrl.value;
     const password = e.target.password.value;
+
+    if (!photoUrl) {
+      toast.error("Please upload a profile photo!");
+      return;
+    }
 
     const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     if (!regex.test(password)) {
@@ -34,7 +65,7 @@ function Register() {
       await updateUser({ displayName: name, photoURL: photoUrl });
       setUser({ ...user, displayName: name, photoURL: photoUrl });
 
-      // ✅ Save user to MongoDB
+      // Save user to MongoDB
       await axiosPublic.post("/users", {
         displayName: name,
         email,
@@ -59,7 +90,7 @@ function Register() {
       const user = result.user;
       setUser(user);
 
-      // ✅ Save user to MongoDB
+      // Save user to MongoDB
       await axiosPublic.post("/users", {
         displayName: user.displayName,
         email: user.email,
@@ -78,9 +109,6 @@ function Register() {
     }
   };
 
- 
-
-
   return (
     <div className="flex justify-center items-center min-h-screen p-8 bg-base-300">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl py-6 mt-8">
@@ -93,11 +121,31 @@ function Register() {
             <label className="label">Email</label>
             <input type="email" name="email" className="input" placeholder="Email" required />
 
-            <label className="label">Photo URL</label>
-            <input type="text" name="photoUrl" className="input" placeholder="Photo URL" required />
+            <label className="label">Profile Photo</label>
+            <input
+              type="file"
+              onChange={handleUploadImage}
+              className="file-input file-input-bordered w-full"
+              accept="image/*"
+              required
+            />
+            {uploading && <p className="text-sm text-gray-500 mt-1">Uploading image...</p>}
+            {photoUrl && (
+              <img
+                src={photoUrl}
+                alt="Profile preview"
+                className="w-24 h-24 rounded-full mt-2 object-cover mx-auto"
+              />
+            )}
 
             <label className="label">Password</label>
-            <input type="password" name="password" className="input" placeholder="Password" required />
+            <input
+              type="password"
+              name="password"
+              className="input"
+              placeholder="Password"
+              required
+            />
 
             <button type="submit" className="btn btn-neutral bg-primary border-none mt-4">
               Register
@@ -105,8 +153,19 @@ function Register() {
 
             <p className="text-center my-2">OR</p>
 
-            <button onClick={handleSigninWithGoogle} type="button" className="btn bg-white text-black border-[#e5e5e5]">
-              <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <button
+              onClick={handleSigninWithGoogle}
+              type="button"
+              className="btn bg-white text-black border-[#e5e5e5]"
+            >
+              {/* Google icon */}
+              <svg
+                aria-label="Google logo"
+                width="16"
+                height="16"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
                 <g>
                   <path d="m0 0H512V512H0" fill="#fff"></path>
                   <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
@@ -118,8 +177,9 @@ function Register() {
               Login with Google
             </button>
           </fieldset>
+
           <p className="text-gray-500 text-sm mt-2">
-            Already have an account? Please{' '}
+            Already have an account? Please{" "}
             <Link to="/login" className="text-blue-500 underline">
               Login
             </Link>

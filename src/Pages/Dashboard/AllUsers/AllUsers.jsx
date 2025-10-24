@@ -12,17 +12,17 @@ const AllUsers = () => {
   const axiosSecure = UseAxiosSecure();
   const {role} = useUserRole()
   const { user } = UseAuth();
-  console.log(role)
   const [search, setSearch] = useState('');
   // fetch all or search results
-  const { data: users = [], isLoading, refetch, isFetching } = useQuery({
-    queryKey: ['allUsers'],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/users?search=${search}`);
-      return res.data;
-    },
-    enabled: false, 
-  });
+ const { data: users = [], isLoading, refetch, isFetching } = useQuery({
+  queryKey: ['allUsers', search],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/users?search=${search || ''}`);
+    return res.data;
+  },
+  enabled: true, // fetch on mount
+});
+
 
   // 🕒 Debounce effect to limit API calls while typing
   useEffect(() => {
@@ -53,6 +53,28 @@ const AllUsers = () => {
       });
     }
   };
+
+  const handleStatusUpdate = async (id, newStatus) => {
+  try {
+    const res = await axiosSecure.patch(`/users/${id}/status`, { status: newStatus });
+    if (res.data.modifiedCount > 0) {
+      Swal.fire({
+        title: 'Success!',
+        text: `User status updated to ${newStatus}`,
+        icon: 'success',
+      });
+      refetch();
+    }
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      title: 'Error!',
+      text: 'Failed to update status',
+      icon: 'error',
+    });
+  }
+};
+
 
   if (isLoading || isFetching) return <Loader />;
 
@@ -87,34 +109,41 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((u, index) => (
-              <tr key={u._id}>
-                <td>{index + 1}</td>
-                <td>{u.displayName}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                
-                  <td>
-                    <select
-                      className="select select-bordered select-sm"
-                      value={u.role}
-                      onChange={(e) => handleRoleUpdate(u._id, e.target.value)}
-                    >
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                    </select>
-                  </td>
-                
-              </tr>
-            ))}
-            {users.length === 0 && (
-              <tr>
-                <td colSpan="5" className="text-center">
-                  No users found.
-                </td>
-              </tr>
-            )}
-          </tbody>
+  {users.map((u, index) => (
+    <tr key={u._id} className={u.status === 'banned' ? 'opacity-50' : ''}>
+      <td>{index + 1}</td>
+      <td>{u.displayName}</td>
+      <td>{u.email}</td>
+      <td>
+        <span className={`px-2 py-1 rounded text-sm ${
+          u.status === 'banned' ? 'bg-red-200 text-red-700' : 'bg-green-200 text-green-700'
+        }`}>
+          {u.status || 'active'}
+        </span>
+      </td>
+      <td className="flex gap-2">
+        {/* Change Role */}
+        <select
+          className="select select-bordered select-sm"
+          value={u.role}
+          onChange={(e) => handleRoleUpdate(u._id, e.target.value)}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        {/* Ban / Unban */}
+        <button
+          className={`btn btn-sm ${u.status === 'banned' ? 'btn-success' : 'btn-error'}`}
+          onClick={() => handleStatusUpdate(u._id, u.status === 'banned' ? 'active' : 'banned')}
+        >
+          {u.status === 'banned' ? 'Unban' : 'Ban'}
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       </div>
     </div>

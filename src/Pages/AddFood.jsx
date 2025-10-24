@@ -2,10 +2,12 @@ import React, { use, useEffect, useState } from 'react'
 import { AuthContext } from '../Providers/AuthProvider'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 function AddFood() {
   const {user} = use(AuthContext);
   const [today,setToday] = useState('');
+  const [profile,setProfile] = useState('');
   const navigate = useNavigate();
 
   // current date 
@@ -17,28 +19,48 @@ function AddFood() {
     setToday(`${year}-${month}-${day}`);
   }, []);
 
-  const handleAddFood = (e) =>{
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const newFood = Object.fromEntries(formData.entries());
-     
-             fetch('https://food-expiry-server-side.vercel.app/foods', {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json'
-                 },
-                 body: JSON.stringify(newFood)
-             })
-             .then(res => res.json())
-             .then(data => {
-                 if(data.insertedId) {
-                    toast.success("Food added successfully!");
-                    navigate('/myitems');
-                 }
-                
-             })
+const handleAddFood = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const newFood = Object.fromEntries(formData.entries());
+
+  // Attach uploaded image URL
+  newFood.photo = profile;
+
+  try {
+    const res = await fetch('https://food-expiry-server-side.vercel.app/foods', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newFood),
+    });
+    const data = await res.json();
+    if (data.insertedId) {
+      toast.success("Food added successfully!");
+      navigate('/myitems');
+    }
+  } catch (err) {
+    toast.error("Failed to add food");
+    console.error(err);
   }
+};
+
+
+ const handleUploadImage = async (e) => {
+  const image = e.target.files[0];
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const uploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_key}`;
+
+  try {
+    const res = await axios.post(uploadUrl, formData);
+    setProfile(res.data.data.display_url); 
+  } catch (error) {
+    console.error("Error uploading image:", error);
+  }
+};
+
 
   return (
     <div className=' md:px-[112px] py-20 px-4 bg-base-300'>
@@ -51,9 +73,13 @@ function AddFood() {
                  
                  <div className='flex flex-col gap-4'> 
                  <label className="label text-accent/80 text-base font-semibold">Food Image</label>
-                 <input type="text"  className="input w-full "  placeholder="Enter photo URL" 
-                 name='photo' required
-                 />
+                 <input
+  type="file"
+  onChange={handleUploadImage}
+  name="photo"
+  className="file-input file-input-bordered  bg-base-100 
+             file:bg-secondary dark:file:bg-green-200 file:border-none file:px-4 file:py-2 file:text-accdark:file:text-green-800 file:rounded file:cursor-pointer"
+/>
                  </div>
 
                      <div className='flex flex-col gap-4'> 
