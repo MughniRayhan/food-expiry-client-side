@@ -10,6 +10,7 @@ import {
 import useUserRole from "../Hooks/useUserRole";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { BookOpen } from "lucide-react";
 
 function DashboardLayout() {
   const { role, roleLoading } = useUserRole();
@@ -137,6 +138,10 @@ function DashboardLayout() {
 
           <NavLink to="/dashboard/nearly-expiry-items" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
             <FaHourglassHalf /> Nearly Expiry Items
+          </NavLink>
+
+          <NavLink to="/dashboard/saved-recipes" className="dashboard_page flex items-center gap-2 mt-5 text-lg">
+            <BookOpen /> Saved Recipes
           </NavLink>
 
           {!roleLoading && role === "admin" && (

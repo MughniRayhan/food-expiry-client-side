@@ -2,6 +2,8 @@ import React, { use, useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import { toast } from 'react-toastify';
 import UseAuth from '../Hooks/UseAuth';
+import { Cpu } from 'lucide-react';
+import { motion } from "framer-motion";
 
 
 function Navbar() {
@@ -112,7 +114,20 @@ const linksAfterLogin = <>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/addfood' > Add Food</NavLink></li>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/myitems'> My Items</NavLink></li>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/wasted-food'>Wasted Food</NavLink></li>
-<li className='text-lg text-accent   hover:text-accent '><NavLink to='/ai-recipes'>AI Recipes</NavLink></li>
+<li className="text-lg">
+  <NavLink to="/ai-recipes">
+    <motion.div className="flex items-center gap-2 px-2  cursor-pointer">
+      <Cpu className="w-5 h-5 text-primary" />
+      <motion.span
+        className="text-lg font-semibold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
+        animate={{ opacity: [0.6, 1, 0.6] }}
+        transition={{ repeat: Infinity, repeatType: "mirror", duration: 1.5 }}
+      >
+        AI Recipes
+      </motion.span>
+    </motion.div>
+  </NavLink>
+</li>
 </>
 
   return (

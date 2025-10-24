@@ -30,6 +30,7 @@ import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome.jsx';
 import MyProfile from './Pages/Dashboard/MyProfile/MyProfile';
 import NearlyExpiryItems from './Pages/Dashboard/NearlyExpiry/NearlyExpiryItems';
 import AiRecipesPage from './Pages/AiRecipesPage';
+import SavedRecipesPage from './Pages/Dashboard/SavedRecipes/SavedRecipesPage';
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
       {
         path: 'nearly-expiry-items',
         Component: NearlyExpiryItems
+      },
+      {
+        path: 'saved-recipes',
+        Component: SavedRecipesPage
       }
     ]
   }

@@ -57,7 +57,7 @@ const AllUsers = () => {
   if (isLoading || isFetching) return <Loader />;
 
   return (
-    <div className="px-12 py-10 bg-white shadow-md min-h-screen">
+    <div className="px-12 py-10 bg-base-100 shadow-md min-h-screen">
       <h2 className="text-3xl font-extrabold text-accent mb-4">All Users</h2>
 
       {/* Search Bar */}
@@ -75,7 +75,7 @@ const AllUsers = () => {
       </div>
 
       {/* Users Table */}
-      <div className="overflow-x-auto border bg-white border-gray-300 rounded-lg mt-6">
+      <div className="overflow-x-auto border bg-base-200 border-gray-300 rounded-lg mt-6">
         <table className="table w-full">
           <thead className="bg-secondary font-bold text-gray-300 dark:text-white">
             <tr>
