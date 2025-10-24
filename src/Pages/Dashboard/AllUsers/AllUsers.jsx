@@ -77,7 +77,7 @@ const AllUsers = () => {
       {/* Users Table */}
       <div className="overflow-x-auto border bg-white border-gray-300 rounded-lg mt-6">
         <table className="table w-full">
-          <thead className="bg-secondary font-bold text-gray-700 dark:text-white">
+          <thead className="bg-secondary font-bold text-gray-300 dark:text-white">
             <tr>
               <th>#</th>
               <th>Name</th>
