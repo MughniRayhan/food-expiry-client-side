@@ -45,7 +45,6 @@ This app allows users to:
 
 ---
 
-## 📦 NPM Packages Used
 
 ## 📦 NPM Packages Used
 
