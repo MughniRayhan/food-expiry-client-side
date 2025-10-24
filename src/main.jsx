@@ -29,6 +29,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DashboardHome from './Pages/Dashboard/DashboardHome/DashboardHome.jsx';
 import MyProfile from './Pages/Dashboard/MyProfile/MyProfile';
 import NearlyExpiryItems from './Pages/Dashboard/NearlyExpiry/NearlyExpiryItems';
+import AiRecipesPage from './Pages/AiRecipesPage';
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
     {
       path: '/wasted-food',
       Component: WastedFood
+    },
+    {
+      path: '/ai-recipes',
+      Component: AiRecipesPage
     },
     {
       path: '/login',

@@ -112,6 +112,7 @@ const linksAfterLogin = <>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/addfood' > Add Food</NavLink></li>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/myitems'> My Items</NavLink></li>
 <li className='text-lg text-accent   hover:text-accent '><NavLink to='/wasted-food'>Wasted Food</NavLink></li>
+<li className='text-lg text-accent   hover:text-accent '><NavLink to='/ai-recipes'>AI Recipes</NavLink></li>
 </>
 
   return (
